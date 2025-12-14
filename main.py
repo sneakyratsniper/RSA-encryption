@@ -26,8 +26,8 @@ def mod_inverse(e, m):
  
 
 def generate_rsa_keypair():
-    p = 67
-    q = 37
+    p = 7919
+    q = 6719
     n = p*q
     phi = (p-1)*(q-1)
     
@@ -59,6 +59,28 @@ print("Public key : ",public_key,"\nPrivate key : ",private_key)
 
 
 
+while True:
+        choice = input("Would you like to \nEncrypt (1)\nDecrypt (2)\n")
+        if choice == '1': #Encrypt
+            message = int(input("Enter your message:\n"))
+            print("\nEncrypted text:\n",encrypt(message, public_key))
+            input("\nPress ENTER to continue...")
+            
+        elif choice == '2': #Decrypt
+            code = int(input("Enter your code:\n"))
+            print("\nDecrypted text:", decrypt(code, private_key))
+            
+            input("\nPress ENTER to continue...")
+            
+        elif choice == '3':
+            break
+        elif choice == '':
+            pass 
+            
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+            input("\nPress ENTER to continue...")
+            
 #c = m^e mod(n)
 #m = c^d mod(n)
 
