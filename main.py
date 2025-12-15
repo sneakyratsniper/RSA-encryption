@@ -1,4 +1,5 @@
 import base64
+import sys
 
 def egcd(a, b):
     if b == 0:
@@ -91,7 +92,8 @@ while True:
             
         elif choice == '3':
             break
-            
+        elif choice == '':
+            sys.stdout.flush()
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
             input("\nPress ENTER to continue...")
