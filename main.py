@@ -7,7 +7,7 @@ def egcd(a, b): #Extended Euclidiean Algorithm
          #ax + 0y = GCD(a,0) => x=1 GCD = a
         return a, 1, 0
     gcd, x1, y1 = egcd(b, a % b)
-    #Recursive GCD untilBézouts Identity is achieved
+    #Recursive GCD until Bézouts Identity is achieved
     x = y1
     # Same as a mod b 
     y = x1 - (a//b) * y1
@@ -28,7 +28,8 @@ def mod_inverse(e, m):
 
 def is_prime(n,a):
     #Check small primes
-    for x in range(2,min(10001,n)):
+    if n % 2 == 0 : return False
+    for x in range(3,min(10001,n),2):
         if n % x == 0 : return False
 
     if n < 3 : raise ValueError("arg must be greater than or equal to 3")
@@ -105,7 +106,8 @@ def int_to_str(number, type = "utf-8"):
     else:
         return data.decode("utf-8")
 
-public_key,private_key = generate_rsa_keypair()
+
+#public_key,private_key = generate_rsa_keypair()
 
 
 while True:
@@ -139,10 +141,10 @@ while True:
             choice= input("\nExit (1) \nStore Keys (2) \nGenerate keys (0)")
             if choice == "0":
                 public_key,private_key = generate_rsa_keypair()
-                print(print("Public key : ",public_key, "\nPrivate key : ",private_key))
+                print(print("Public key : ",public_key, "\n\nPrivate key : ",private_key))
             elif choice == "2":
-                open('storedvalues.txt.txt', 'w').close()
-                with open('storedvalues.txt','a') as f: 
+                open('keys.txt', 'w').close()
+                with open('keys.txt','a') as f: 
                     f.write('Public key: ('+str(public_key[0])+','+str(public_key[1])+')\n')
                     f.write('Private key: ('+str(private_key[0])+','+str(private_key[1])+')\n')
 
