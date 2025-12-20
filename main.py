@@ -116,18 +116,22 @@ while True:
             
             message = input("Enter your message:\n")
             message = str_to_int(message)
-            code = int_to_str(encrypt(message, public_key),'b64')
-            print("\nEncrypted message:\n",code)
-            
+            try:
+                code = int_to_str(encrypt(message, public_key),'b64')
+                print("\nEncrypted message:\n",code)
+            except NameError:
+                print("No key!")
             input("\nPress ENTER to continue...")
             
         elif choice == '2': #Decrypt
             
             code = input("Enter your code:\n").strip('')
             code = str_to_int(code,'b64')
-            message = int_to_str(decrypt(code, private_key))
-            print("\nDecrypted message:", message)
-            
+            try:
+                message = int_to_str(decrypt(code, private_key))
+                print("\nDecrypted message:", message)
+            except NameError:
+                print("No key!")
             input("\nPress ENTER to continue...")
             
         elif choice == '3':
@@ -138,16 +142,15 @@ while True:
             except NameError:
                 print("No keys")
                 
-            choice= input("\nExit (1) \nStore Keys (2) \nGenerate keys (0)")
+            choice = input("\nExit (1) \nStore Keys (2) \nGenerate keys (0)")
             if choice == "0":
                 public_key,private_key = generate_rsa_keypair()
                 print(print("Public key : ",public_key, "\n\nPrivate key : ",private_key))
             elif choice == "2":
-                open('keys.txt', 'w').close()
-                with open('keys.txt','a') as f: 
-                    f.write('Public key: ('+str(public_key[0])+','+str(public_key[1])+')\n')
-                    f.write('Private key: ('+str(private_key[0])+','+str(private_key[1])+')\n')
-
+                f = open('keys.txt', 'w')
+                f.write('Public key: ('+str(public_key[0])+','+str(public_key[1])+')\n'+'Private key: ('+str(private_key[0])+','+str(private_key[1])+')')
+                f.close()
+            
             input("\nPress ENTER to continue...")
 
         elif choice == '':
