@@ -56,14 +56,17 @@ def is_prime(n,a):
     return False
 
 def gen_prime(size, rounds = 10):
-    n = random.randint(10**(size-1),10**size)
-    
-    for x in range(rounds):
-        a = random.randrange(2, n-1)
-        if is_prime(n,a) is False:
-            return gen_prime(size)
-  
-    return n
+    while True:
+        n = random.randint(10**(size-1),10**size)
+        
+        for x in range(rounds):
+            a = random.randrange(2, n-1)
+            if is_prime(n,a) is False:
+                break
+        else:
+            return n
+
+
 
 
 def generate_rsa_keypair():
